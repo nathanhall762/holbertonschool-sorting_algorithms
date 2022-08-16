@@ -31,10 +31,13 @@ void sort_quick(int *array, int low, int high, size_t size)
 				j++;
 		}
 	}
-	tmp = array[high];
-	array[high] = array[j];
-	array[j] = tmp;
-	print_array(array, size);
+	if (j != high)
+	{
+		tmp = array[high];
+		array[high] = array[j];
+		array[j] = tmp;
+		print_array(array, size);
+	}
 
 	sort_quick(array, low, j - 1, size);
 	sort_quick(array, j + 1, high, size);
