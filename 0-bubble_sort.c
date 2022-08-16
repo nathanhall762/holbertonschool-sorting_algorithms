@@ -1,5 +1,11 @@
 #include "sort.h"
 
+/**
+*bubble_sort - sorts eith bubbles
+*@array: pointer to array to be sorted
+*@size: size of array
+*/
+
 void bubble_sort(int *array, size_t size)
 {
 	int temp, unsorted = 1;
