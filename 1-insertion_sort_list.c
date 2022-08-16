@@ -36,10 +36,11 @@ void swap(listint_t **head, listint_t **list)
 
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *node = *list, *back_node;
+	listint_t *node, *back_node;
 
-	if (node == NULL)
+	if (list == NULL)
 		return;
+	node = *list;
 	for (; node->next != NULL; node = node->next)
 	{
 		if (node->n > node->next->n)
