@@ -24,5 +24,10 @@ void bubble_sort(int *array, size_t size);
 void insertion_sort_list(listint_t **list);
 void selection_sort(int *array, size_t size);
 void quick_sort(int *array, size_t size);
+void merge(int *array, int low, int mid, int high);
+void sort(int *array, int low, int high);
+void merge_sort(int *array, size_t size);
+int *malloc_array(int size);
+
 
 #endif
