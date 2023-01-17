@@ -39,7 +39,7 @@ void heapify(int *array, int sub_array_size, size_t size, int i)
 	{
 		swap(&array[i], &array[largest]);
 		print_array(array, size);
-		heapify(array, size, size, largest);
+		heapify(array, sub_array_size, size, largest);
 	}
 }
 
