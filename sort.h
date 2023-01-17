@@ -28,6 +28,11 @@ void merge(int *array, int low, int mid, int high);
 void sort(int *array, int low, int high);
 void merge_sort(int *array, size_t size);
 int *malloc_array(int size);
+void print_all(int *array, int high, int low, int *temp_left, int *temp_right, int left_len, int right_len);
+void heap_sort(int *array, size_t size);
+void swap(int *a, int *b);
+void heapify(int *array, int sub_array_size, size_t size, int i);
+
 
 
 #endif
