@@ -53,5 +53,7 @@ void quick_sort(int *array, size_t size)
 {
 	int low = 0, high = size - 1;
 
+	if (size == 0)
+		return;
 	sort_quick(array, low, high, size);
 }
