@@ -33,6 +33,7 @@ int left_len, int right_len);
 void heap_sort(int *array, size_t size);
 void swap(int *a, int *b);
 void heapify(int *array, int sub_array_size, size_t size, int i);
+void radix_sort(int *array, size_t size);
 
 
 

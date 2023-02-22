@@ -1,80 +1,51 @@
-#include "sort.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-void merge(int *array, int low, int mid, int high)
-{
-	int left_idx, right_idx, array_idx;
-	int left_len = mid - low + 1;
-	int right_len = high - mid;
-	int *temp_left = malloc_array(left_len);
-	int *temp_right = malloc_array(right_len);
+void merge(int *array, int *temp, int left, int mid, int right) {
+    int i = left, j = mid + 1, k = left;
 
-	for (left_idx = 0; left_idx < left_len; left_idx++)
-		temp_left[left_idx] = array[low + left_idx];
-	for (right_idx = 0; right_idx < right_len; right_idx++)
-		temp_right[right_idx] = array[mid + right_idx + 1];
-	left_idx = 0, right_idx = 0, array_idx = low;
-	while (left_idx < left_len && right_idx < right_len)
-	{
-		if (temp_left[left_idx] <= temp_right[right_idx])
-		{
-			array[array_idx] = temp_left[left_idx];
-			left_idx++;
-		}
-		else
-		{
-			array[array_idx] = temp_right[right_idx];
-			right_idx++;
-		}
-		array_idx++;
-	}
-	while (left_idx < left_len)
-	{
-		array[array_idx] = temp_left[left_idx];
-		left_idx++;
-		array_idx++;
-	}
-	while (right_idx < right_len)
-	{
-		array[array_idx] = temp_right[right_idx];
-		right_idx++;
-		array_idx++;
-	}
-	printf("Merging...\n[left]: ");
-	print_array(temp_left, left_len);
-	printf("[right]: ");
-	print_array(temp_right, right_len);
-	printf("[Done]: ");
-	array += low;
-	print_array(array, high - low + 1);
-	array -= low;
-	free(temp_left);
-	free(temp_right);
+    while (i <= mid && j <= right) {
+        if (array[i] <= array[j]) {
+            temp[k] = array[i];
+            i++;
+        } else {
+            temp[k] = array[j];
+            j++;
+        }
+        k++;
+    }
+
+    while (i <= mid) {
+        temp[k] = array[i];
+        k++;
+        i++;
+    }
+
+    while (j <= right) {
+        temp[k] = array[j];
+        k++;
+        j++;
+    }
+
+    for (i = left; i <= right; i++) {
+        array[i] = temp[i];
+    }
 }
 
-void sort(int *array, int low, int high)
-{
-	int mid;
+void merge_sort_helper(int *array, int *temp, int left, int right) {
+    int mid;
+    if (left >= right) {
+        return;
+    }
 
-	if (low < high)
-	{
-		mid = low + (high - low) / 2;
-
-		sort(array, low, mid);
-		sort(array, mid + 1, high);
-
-		merge(array, low, mid, high);
-	}
+	mid = (left + right) / 2;
+    merge_sort_helper(array, temp, left, mid);
+    merge_sort_helper(array, temp, mid + 1, right);
+    merge(array, temp, left, mid, right);
 }
 
-void merge_sort(int *array, size_t size)
-{
-	sort(array, 0, size - 1);
-}
-
-int *malloc_array(int size)
-{
-	int *array;
-
-	array = malloc(size * sizeof(int));
-	return (array);
+void merge_sort(int *array, size_t size) {
+    int *temp = (int *) malloc(sizeof(int) * size);
+    merge_sort_helper(array, temp, 0, size - 1);
+    free(temp);
 }
