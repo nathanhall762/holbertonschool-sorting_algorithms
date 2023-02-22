@@ -1,5 +1,11 @@
 #include "sort.h"
 
+/**
+ * radix_sort - sorts array of integers
+ * @array: array to sort
+ * @size: size of array
+ */
+
 void radix_sort(int *array, size_t size)
 {
 	int i, max, place = 1;
@@ -23,6 +29,14 @@ void radix_sort(int *array, size_t size)
 	free(output);
 }
 
+/**
+ * counting_sort - sorts array of integers
+ * @array: array to sort
+ * @size: size of array
+ * @output: output array
+ * @place: digit place
+ */
+
 void counting_sort(int *array, size_t size, int *output, int place)
 {
 	int i, count[10] = {0};
@@ -36,6 +50,6 @@ void counting_sort(int *array, size_t size, int *output, int place)
 		output[count[(array[i] / place) % 10] - 1] = array[i];
 		count[(array[i] / place) % 10]--;
 	}
-	for (i = 0; i < size; i++)
+	for (i = 0; i < (int) size; i++)
 		array[i] = output[i];
 }
